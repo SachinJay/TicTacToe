@@ -2,6 +2,9 @@ package tests;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 import org.junit.jupiter.api.Test;
 
 import game.Board;
@@ -131,5 +134,28 @@ class GameTests
 		
 		game2.getBoard().print();
 		
+		
+		//Test next moves function
+		ArrayList<int[]> moves = game.nextMoves(Square.O);
+		ArrayList<int[]> moves2 = game.nextMoves(Square.X);
+		int[][] myGuess = {{0,0},{0,1},{0,2},{1,0},{1,2},{2,0},{2,1},{2,2}};
+		
+		for(int i = 0; i < myGuess.length; i++)
+		{
+			assertEquals(myGuess[i][0], moves.get(i)[0]);
+			assertEquals(myGuess[i][1], moves.get(i)[1]);
+			
+			//Regardless of side, the next possible moves should be the same in this case
+			assertEquals(myGuess[i][0], moves2.get(i)[0]);
+			assertEquals(myGuess[i][1], moves2.get(i)[1]);
+		}
+		
+		//Make X win
+		game.getBoard().place(Square.X, 0, 1);
+		game.getBoard().place(Square.X, 2, 1);
+		
+		//Since X has won, neither side has any more possible moves
+		assertTrue(game.nextMoves(Square.O).isEmpty());
+		assertTrue(game.nextMoves(Square.X).isEmpty());
 	}
 }

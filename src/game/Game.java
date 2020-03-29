@@ -200,7 +200,7 @@ public class Game
 		Square opSide = side == Square.X  ? Square.O : Square.X;	
 		
 		// If the game ended then there are no new moves to be made
-		if (isWon(opSide))
+		if (isWon(opSide) || isWon(side))
 		{
 			return moves;
 

@@ -118,4 +118,31 @@ public class Game
 		}
 		
 	}
+	
+	/**
+	 * Returns true if the given side has tictactoe
+	 * @param side the side in question
+	 * @return true if side won
+	 */
+	public Boolean isWon(Square side)
+	{
+		Square[][] board = this.getBoard().getBoard();
+		
+		//Horizontal wins
+		Boolean win1 = board[0][0] == side && board[0][1] == side && board[0][2] == side;
+		Boolean win2 = board[1][0] == side && board[1][1] == side && board[1][2] == side;
+		Boolean win3 = board[2][0] == side && board[2][1] == side && board[2][2] == side;
+		
+		//Vertical wins
+		Boolean win4 = board[0][0] == side && board[1][0] == side && board[2][0] == side;
+		Boolean win5 = board[0][1] == side && board[1][1] == side && board[2][1] == side;
+		Boolean win6 = board[0][2] == side && board[1][2] == side && board[2][2] == side;
+		
+		//Diagonal wins
+		Boolean win7 = board[0][0] == side && board[1][1] == side && board[2][2] == side;
+		Boolean win8 = board[0][2] == side && board[1][1] == side && board[2][0] == side;
+		
+		return win1||win2 ||win3 ||win4 ||win5 ||win6 ||win7 ||win8;
+		
+	}
 }

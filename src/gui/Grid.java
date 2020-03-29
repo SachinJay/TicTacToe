@@ -182,6 +182,8 @@ public class Grid
 				public void mouseClicked(MouseEvent e)
 				{
 					game.place(game.getTurnSide(), r, c);
+					game.getBoard().print();
+					System.out.println();
 					
 					SwingUtilities.invokeLater(new Runnable()
 					{

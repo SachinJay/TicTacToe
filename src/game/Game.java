@@ -1,5 +1,7 @@
 package game;
 
+import java.util.ArrayList;
+
 /**
  * Class to represent game. Keeps track of board, players, and turn
  * @author Sachin Devasahayam
@@ -184,5 +186,41 @@ public class Game
 			return Status.O_WON;
 		}
 		else return Status.IN_PLAY;
+	}
+	
+	/**
+	 * Returns all next possible moves for this player
+	 * @param side the player we care about
+	 * @return
+	 */
+	public ArrayList<int[]> nextMoves(Square side)
+	{
+		ArrayList<int[]> moves = new ArrayList<>();
+		
+		Square opSide = side == Square.X  ? Square.O : Square.X;	
+		
+		// If the game ended then there are no new moves to be made
+		if (isWon(opSide))
+		{
+			return moves;
+
+		}
+		else
+		{
+			//Loop through board
+			for(int r = 0; r < Constants.BOARD_SIZE; r++)
+			{
+				for(int c = 0; c < Constants.BOARD_SIZE; c++)
+				{
+					//if space is empty, it is a valid move
+					if(this.board.getBoard()[r][c] == Square.BLANK)
+					{
+						int[] move = {r,c};
+						moves.add(move);
+					}
+				}
+			}
+			return moves;
+		}
 	}
 }

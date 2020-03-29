@@ -1,21 +1,40 @@
 package gui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
+import game.Board;
 import game.Constants;
+import game.Game;
+import game.Square;
 
 public class Grid
 {
 	private JFrame gameFrame;
+	private Game game;
 	private BoardPanel boardPanel;
+	
 	
 	public Grid()
 	{
@@ -27,6 +46,13 @@ public class Grid
 		JMenuBar menuBar= new JMenuBar();
 		addToMenuBar(menuBar);
 		gameFrame.setJMenuBar(menuBar);
+		
+		//Default game between person and AI
+		game = new Game();
+		
+		boardPanel = new BoardPanel();
+		
+		gameFrame.add(boardPanel, BorderLayout.CENTER);
 
 		//Give it dimensions and make it visible
 		this.gameFrame.setSize(Constants.FRAME_DIM);
@@ -63,5 +89,142 @@ public class Grid
 		
 		windowMenu.add(exit);
 		return windowMenu;
+	}
+	
+	private class BoardPanel extends JPanel
+	{
+		private List<SquarePanel> boardSquares;
+		
+		public BoardPanel()
+		{
+			super(new GridLayout(Constants.BOARD_SIZE, Constants.BOARD_SIZE));
+			boardSquares = new ArrayList<>();
+			
+			for(int r = 0; r < Constants.BOARD_SIZE; r++)
+			{
+				for(int c = 0; c < Constants.BOARD_SIZE; c++)
+				{
+					SquarePanel sp = new SquarePanel(this, r, c);
+					boardSquares.add(sp);
+					add(sp);
+				}
+			}
+			
+			setPreferredSize(Constants.BOARD_DIM);
+			setBackground(Color.white);
+			validate();
+		}
+		
+		public void drawBoard(Board board)
+		{
+			
+			removeAll();
+			
+			for(SquarePanel sp: boardSquares)
+			{
+				sp.drawSquare(board);
+				add(sp);
+			}
+			validate();
+			repaint();
+		}
+		
+	}
+	
+	private class SquarePanel extends JPanel
+	{
+		//row and column
+		private int r;
+		private int c;
+		
+		public SquarePanel(BoardPanel bp, int row, int col)
+		{
+			super(new GridBagLayout());
+			this.r = row; 
+			this.c = col;
+			setBorder(Constants.BOARD_BORDER);
+			setPreferredSize(Constants.SQUARE_DIM);
+			assignSquareMark(game.getBoard());
+			
+			addMouseListener(new MouseListener()
+			{
+				
+				@Override
+				public void mouseReleased(MouseEvent e)
+				{
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mousePressed(MouseEvent e)
+				{
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mouseExited(MouseEvent e)
+				{
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mouseEntered(MouseEvent e)
+				{
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mouseClicked(MouseEvent e)
+				{
+					game.place(game.getTurnSide(), r, c);
+					
+					SwingUtilities.invokeLater(new Runnable()
+					{
+						
+						@Override
+						public void run()
+						{
+							bp.drawBoard(game.getBoard());
+						}
+					});
+					
+				}
+			});
+		}
+		
+		public void drawSquare(Board board)
+		{
+			setBackground(Color.white);
+			assignSquareMark(board);
+			
+			validate();
+			repaint();
+		}
+		
+		private void assignSquareMark(Board board)
+		{
+			removeAll();
+			//If this square is not blank
+			if(!board.getBoard()[this.r][this.c].equals(Square.BLANK))
+			{
+				String fileName = Constants.IMAGES_PATH + board.getBoard()[this.r][this.c].toString().toLowerCase()+Constants.IMAGE_SUFFIX;
+				File file = new File(fileName);
+				try
+				{
+					BufferedImage img = ImageIO.read(file);
+					add(new JLabel(new ImageIcon(img)));
+				} catch (IOException e)
+				{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		
 	}
 }

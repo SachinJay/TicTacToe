@@ -15,4 +15,7 @@ public class Constants
 
 	//MenuBar
 	public static final String WINDOW_MENU_NAME = "Window";
+
+
+	public static final String DEFAULT_PLAYER_NAME = "Sachin";
 }

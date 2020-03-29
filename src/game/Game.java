@@ -98,7 +98,8 @@ public class Game
 	 */
 	public Boolean place(Square square, int r, int c)
 	{
-		if(this.getTurnSide().equals(square) && board.getBoard()[r][c].equals(Square.BLANK))
+		Square opSide = square == Square.O ? Square.X : Square.O;
+		if(this.getTurnSide().equals(square) && board.getBoard()[r][c].equals(Square.BLANK) && !isWon(opSide))
 		{
 			this.getBoard().place(square, r, c);
 			//Switch turns

@@ -36,4 +36,15 @@ public class Constants
 ;
 
 	public static final Border BOARD_BORDER = new MatteBorder(5, 5, 5, 5, Color.BLACK);
+
+	public static final Border SQUARE00_BORDER = new MatteBorder(0, 0, 5, 5, Color.BLACK);
+	public static final Border SQUARE01_BORDER = new MatteBorder(0, 5, 5, 5, Color.BLACK);
+	public static final Border SQUARE02_BORDER = new MatteBorder(0, 5, 5, 0, Color.BLACK);
+	public static final Border SQUARE10_BORDER = new MatteBorder(5, 0, 5, 5, Color.BLACK);
+	public static final Border SQUARE11_BORDER = new MatteBorder(5, 5, 5, 5, Color.BLACK);
+	public static final Border SQUARE12_BORDER = new MatteBorder(5, 5, 5, 0, Color.BLACK);
+	public static final Border SQUARE20_BORDER = new MatteBorder(5, 0, 0, 5, Color.BLACK);
+	public static final Border SQUARE21_BORDER = new MatteBorder(5, 5, 0, 5, Color.BLACK);
+	public static final Border SQUARE22_BORDER = new MatteBorder(5, 5, 0, 0, Color.BLACK);
+	
 }

@@ -142,7 +142,8 @@ public class Grid
 			super(new GridBagLayout());
 			this.r = row; 
 			this.c = col;
-			setBorder(Constants.BOARD_BORDER);
+			setBackground(Color.white);
+			assignBorder();
 			setPreferredSize(Constants.SQUARE_DIM);
 			assignSquareMark(game.getBoard());
 			
@@ -200,9 +201,32 @@ public class Grid
 		{
 			setBackground(Color.white);
 			assignSquareMark(board);
+			assignBorder();
 			
 			validate();
 			repaint();
+		}
+		
+		private void assignBorder()
+		{
+			if(this.r == 0)
+			{
+				if(this.c == 0) setBorder(Constants.SQUARE00_BORDER);
+				if(this.c == 1) setBorder(Constants.SQUARE01_BORDER);
+				if(this.c == 2) setBorder(Constants.SQUARE02_BORDER);
+			}
+			else if(this.r == 1)
+			{
+				if(this.c == 0) setBorder(Constants.SQUARE10_BORDER);
+				if(this.c == 1) setBorder(Constants.SQUARE11_BORDER);
+				if(this.c == 2) setBorder(Constants.SQUARE12_BORDER);
+			}
+			else if(this.r == 2)
+			{
+				if(this.c == 0) setBorder(Constants.SQUARE20_BORDER);
+				if(this.c == 1) setBorder(Constants.SQUARE21_BORDER);
+				if(this.c == 2) setBorder(Constants.SQUARE22_BORDER);
+			}
 		}
 		
 		private void assignSquareMark(Board board)

@@ -9,7 +9,7 @@ public class Board
 	 */
 	public Board()
 	{
-		board = new Square[Constants.boardSize][Constants.boardSize];
+		board = new Square[Constants.BOARD_SIZE][Constants.BOARD_SIZE];
 		
 		for(int r = 0; r < board.length; r++)
 		{

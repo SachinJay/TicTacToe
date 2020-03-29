@@ -3,6 +3,7 @@ package game;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Insets;
 
@@ -46,5 +47,9 @@ public class Constants
 	public static final Border SQUARE20_BORDER = new MatteBorder(5, 0, 0, 5, Color.BLACK);
 	public static final Border SQUARE21_BORDER = new MatteBorder(5, 5, 0, 5, Color.BLACK);
 	public static final Border SQUARE22_BORDER = new MatteBorder(5, 5, 0, 0, Color.BLACK);
+
+	public static final Color STATUS_BACKGROUND = Color.decode("0x89CFF0");
+
+	public static final Font STATUS_FONT = new Font("Times New Roman", 1, 20);
 	
 }

@@ -9,12 +9,13 @@ public class Board
 	 */
 	public Board()
 	{
-		Square blank = Square.BLANK;
-		for(Square arr[] : board)
+		board = new Square[3][3];
+		
+		for(int r = 0; r < board.length; r++)
 		{
-			for(Square sqr : arr)
+			for(int c = 0; c < board[r].length; c++)
 			{
-				sqr = blank;				
+				board[r][c] = Square.BLANK;
 			}
 		}
 	}
@@ -32,10 +33,12 @@ public class Board
 				{
 					System.out.print("-"+" ");
 				}
+				else
 				{
 					System.out.print(sqr + " ");
 				}
 			}
+			System.out.println();
 		}
 	}
 	

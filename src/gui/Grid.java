@@ -34,6 +34,7 @@ public class Grid
 	private JFrame gameFrame;
 	private Game game;
 	private BoardPanel boardPanel;
+	private StatusPanel statusPanel;
 	
 	
 	public Grid()
@@ -51,13 +52,15 @@ public class Grid
 		game = new Game();
 		
 		boardPanel = new BoardPanel();
+		statusPanel = new StatusPanel(game);
 		
 		gameFrame.add(boardPanel, BorderLayout.CENTER);
+		gameFrame.add(statusPanel,BorderLayout.SOUTH);
 
 		//Give it dimensions and make it visible
-		this.gameFrame.setSize(Constants.FRAME_DIM);
+		gameFrame.setSize(Constants.FRAME_DIM);
 		gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.gameFrame.setVisible(true);
+		gameFrame.setVisible(true);
 	}
 
 	/**
@@ -192,6 +195,7 @@ public class Grid
 						public void run()
 						{
 							bp.drawBoard(game.getBoard());
+							statusPanel.setText(game);
 						}
 					});
 					

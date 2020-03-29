@@ -14,6 +14,14 @@ public class Constants
 {
 	//******Board*******/
 	public static final int BOARD_SIZE = 3; 
+	public static final int[][] LINES = {{0,0,0,1,0,2},{1,0,1,1,1,2},{2,0,2,1,2,2}, //horizontal
+			{0,0,1,0,2,0},{0,1,1,1,2,1},{0,2,1,2,2,2},//vertical
+			{0,0,1,1,2,2},{0,2,1,1,2,0}};//diagonals
+	
+	public static final int THREE_IN_LINE_SCORE = 100;
+	public static final int TWO_IN_LINE_SCORE = 10;
+	public static final int ONE_IN_LINE_SCORE = 1;
+	
 	
 	//******Player******//
 	public static final String DEFAULT_PLAYER_NAME = "Sachin";
@@ -33,9 +41,8 @@ public class Constants
 	public static final Dimension BOARD_DIM = new Dimension(450,450);
 
 	public static final String IMAGES_PATH ="src/images/";
-	public static final String IMAGE_SUFFIX = ".png"
-;
-
+	public static final String IMAGE_SUFFIX = ".png";
+	
 	public static final Border BOARD_BORDER = new MatteBorder(5, 5, 5, 5, Color.BLACK);
 
 	public static final Border SQUARE00_BORDER = new MatteBorder(0, 0, 5, 5, Color.BLACK);

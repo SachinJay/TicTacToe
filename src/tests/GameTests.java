@@ -157,5 +157,18 @@ class GameTests
 		//Since X has won, neither side has any more possible moves
 		assertTrue(game.nextMoves(Square.O).isEmpty());
 		assertTrue(game.nextMoves(Square.X).isEmpty());
+		
+		//Assert evaluations
+		game.getBoard().print();
+		
+		//One line of three and 5 lines with just 1
+		assertEquals(Constants.THREE_IN_LINE_SCORE + 5*Constants.ONE_IN_LINE_SCORE, game.getBoard().evaluate(Square.X));
+		
+		//Turn the vertical three in a row into just two in a row by placing a blocking O
+		game.getBoard().place(Square.O, 0, 1);
+		//Now, there should be, 4 one in a row, and 1 one in a row for the opposition
+		//Thus: 
+		int expected = Constants.ONE_IN_LINE_SCORE * 3;
+		assertEquals(expected, game.getBoard().evaluate(Square.X));
 	}
 }

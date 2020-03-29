@@ -5,6 +5,9 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 import game.Board;
+import game.Constants;
+import game.Game;
+import game.Player;
 import game.Square;
 
 class GameTests
@@ -64,4 +67,52 @@ class GameTests
 		}
 	}
 
+	@Test
+	void playerTests()
+	{
+		//Default
+		Player sachin = new Player();
+		assertEquals(Constants.DEFAULT_PLAYER_NAME, sachin.getName());
+		assertTrue(sachin.getIsHuman());
+		assertEquals(Square.X, sachin.getSide());
+		
+		//Custom
+		Player AI = new Player("AI", false, Square.O);
+		assertEquals("AI", AI.getName());
+		assertFalse(AI.getIsHuman());
+		assertEquals(Square.O, AI.getSide());
+	}
+	
+	@Test
+	void gameTests()
+	{
+		//Default
+		Game game = new Game();
+		
+		assertEquals(Constants.DEFAULT_PLAYER_NAME, game.getPlayers()[0].getName());
+		assertEquals("AI", game.getPlayers()[1].getName());
+		
+		assertEquals("Sachin", game.getTurn().getName());
+		assertEquals(Square.X, game.getTurnSide());
+		assertEquals(game.getTurnSide(), game.getTurn().getSide());
+		
+		//Test mutability of the board
+		System.out.println("The default game board:");
+		game.getBoard().print();
+		System.out.println();
+		
+		game.getBoard().place(Square.X, 1, 1);
+		System.out.println("The board after placing an x in the center");
+		game.getBoard().print();
+		System.out.println();
+		
+		//Custom
+		Player p1 = new Player();
+		Player p2 = new Player("HAL", false, Square.O);
+		Game game2 = new Game(p1,p2);
+		
+		assertEquals(p1, game2.getPlayers()[0]);
+		assertEquals(p2, game2.getPlayers()[1]);
+		
+	}
 }

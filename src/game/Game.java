@@ -14,7 +14,7 @@ public class Game
 	public Game()
 	{
 		players[0] = new Player();
-		players[1] = new Player("AI", false);
+		players[1] = new Player("AI", false, Square.O);
 		
 		setTurn(players[0]);
 		setBoard(new Board());
@@ -61,4 +61,30 @@ public class Game
 		this.board = board;
 	}
 
+	/**
+	 * 
+	 * @return Both players
+	 */
+	public Player[] getPlayers()
+	{
+		return players;
+	}
+	
+	/**
+	 * 
+	 * @param players the players to be set
+	 */
+	public void setPlayers(Player[] players)
+	{
+		this.players = players;
+	}
+	
+	/**
+	 * 
+	 * @return what side the current player is on
+	 */
+	public Square getTurnSide()
+	{
+		return this.turn.getSide();
+	}
 }

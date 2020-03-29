@@ -27,11 +27,11 @@ public class Player
 	 * @param name name of player
 	 * @param isHuman whether or not the player is human
 	 */
-	public Player(String name, Boolean isHuman)
+	public Player(String name, Boolean isHuman, Square side)
 	{
 		setName(name);
 		setIsHuman(isHuman);
-		setSide(Square.X);
+		setSide(side);
 	}
 	
 	/**

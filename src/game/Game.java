@@ -87,4 +87,35 @@ public class Game
 	{
 		return this.turn.getSide();
 	}
+	
+	/**
+	 *  Just like the Board.place() function except checks that the placement is valid
+	 * Side effects: mutates board, changes turn
+	 * @param sqr thing to be placed
+	 * @param r row to place it
+	 * @param c column to place it
+	 * @return true iff valid place
+	 */
+	public Boolean place(Square square, int r, int c)
+	{
+		if(this.getTurnSide().equals(square) && board.getBoard()[r][c].equals(Square.BLANK))
+		{
+			this.getBoard().place(square, r, c);
+			//Switch turns
+			if(this.getTurn().equals(this.getPlayers()[0]))
+			{
+				this.setTurn(this.getPlayers()[1]);
+			}
+			else
+			{
+				this.setTurn(this.getPlayers()[0]);
+			}
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+		
+	}
 }

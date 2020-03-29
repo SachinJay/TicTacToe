@@ -113,6 +113,23 @@ class GameTests
 		
 		assertEquals(p1, game2.getPlayers()[0]);
 		assertEquals(p2, game2.getPlayers()[1]);
+		assertEquals(p1,game2.getTurn());
+		assertEquals(p1.getSide(), game2.getTurnSide());
+		
+		//Test the game place function
+		assertFalse(game2.place(Square.O,1,1));
+		assertEquals(p1,game2.getTurn());
+		
+		assertTrue(game2.place(Square.X, 1, 1));
+		assertEquals(p2,game2.getTurn());
+		assertEquals(p2.getSide(), game2.getTurnSide());
+		//game2.getBoard().print();
+		
+		assertFalse(game2.place(Square.O, 1, 1));
+		assertTrue(game2.place(Square.O, 0, 0));
+		assertEquals(p1,game2.getTurn());
+		
+		game2.getBoard().print();
 		
 	}
 }

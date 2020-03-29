@@ -50,5 +50,14 @@ public class Board
 	{
 		board[r][c] = square;
 	}
+	
+	/**
+	 * 
+	 * @return the current board
+	 */
+	public Square[][] getBoard()
+	{
+		return board;
+	}
 
 }

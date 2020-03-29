@@ -10,6 +10,7 @@ public class Game
 	private Player[] players = new Player[2];
 	private Player turn;
 	private Board board; 
+	private Status status;
 	
 	public Game()
 	{
@@ -18,6 +19,7 @@ public class Game
 		
 		setTurn(players[0]);
 		setBoard(new Board());
+		setStatus(Status.IN_PLAY);
 	}
 	
 	public Game(Player p1, Player p2)
@@ -27,6 +29,7 @@ public class Game
 		
 		setTurn(players[0]);
 		setBoard(new Board());
+		setStatus(Status.IN_PLAY);
 	}
 
 	/**
@@ -102,6 +105,8 @@ public class Game
 		if(this.getTurnSide().equals(square) && board.getBoard()[r][c].equals(Square.BLANK) && !isWon(opSide))
 		{
 			this.getBoard().place(square, r, c);
+			Status curStat = isWon(Square.O)?  Status.O_WON : isWon(Square.X) ? Status.X_WON : Status.IN_PLAY; 
+			setStatus(curStat);
 			//Switch turns
 			if(this.getTurn().equals(this.getPlayers()[0]))
 			{
@@ -145,5 +150,39 @@ public class Game
 		
 		return win1||win2 ||win3 ||win4 ||win5 ||win6 ||win7 ||win8;
 		
+	}
+
+	/**
+	 * @return the status
+	 */
+	public Status getStatus()
+	{
+		return calcStatus();
+	}
+
+	/**
+	 * @param status the status to set
+	 */
+	public void setStatus(Status status)
+	{
+		this.status = status;
+	}
+	
+	//TODO I believe this is now redundant due to calculation in place function
+	/**
+	 * 
+	 * @return status of the game as calculated
+	 */
+	private Status calcStatus()
+	{
+		if(isWon(Square.X))
+		{
+			return Status.X_WON;
+		}
+		else if(isWon(Square.O))
+		{
+			return Status.O_WON;
+		}
+		else return Status.IN_PLAY;
 	}
 }

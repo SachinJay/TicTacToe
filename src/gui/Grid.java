@@ -15,7 +15,7 @@ import game.Constants;
 public class Grid
 {
 	private JFrame gameFrame;
-	private JPanel boardPanel;
+	private BoardPanel boardPanel;
 	
 	public Grid()
 	{
@@ -30,6 +30,7 @@ public class Grid
 
 		//Give it dimensions and make it visible
 		this.gameFrame.setSize(Constants.FRAME_DIM);
+		gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.gameFrame.setVisible(true);
 	}
 
@@ -42,7 +43,10 @@ public class Grid
 		menuBar.add(createWindowMenu());
 	}
 
-	
+	/**
+	 * Creates window menu, used to exit the GUI
+	 * @return window menu
+	 */
 	private JMenu createWindowMenu()
 	{
 		JMenu windowMenu = new JMenu(Constants.WINDOW_MENU_NAME);

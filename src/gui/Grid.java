@@ -24,9 +24,11 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
+import game.AIPlayer;
 import game.Board;
 import game.Constants;
 import game.Game;
+import game.Player;
 import game.Square;
 
 public class Grid
@@ -35,6 +37,7 @@ public class Grid
 	private Game game;
 	private BoardPanel boardPanel;
 	private StatusPanel statusPanel;
+	private AIPlayer aiPlayer;
 	
 	
 	public Grid()
@@ -48,8 +51,10 @@ public class Grid
 		addToMenuBar(menuBar);
 		gameFrame.setJMenuBar(menuBar);
 		
-		//Default game between person and AI
-		game = new Game();
+		//Game between person and AI
+		Player p1 = new Player("Sachin", false, Square.X);
+		aiPlayer = new AIPlayer("HAL",Square.O);
+		game = new Game(p1, aiPlayer);
 		
 		boardPanel = new BoardPanel();
 		statusPanel = new StatusPanel(game);

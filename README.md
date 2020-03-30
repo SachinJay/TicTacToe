@@ -1,7 +1,8 @@
 # TicTacToe
 
 Goals
-- [ ] implement classes
-- [ ] implement JUnit tests
-- [ ] implement GUI
-- [ ] implement minimax
+- [x] implement classes
+- [x] implement JUnit tests
+- [x] implement GUI
+- [x] implement minimax
+  - [ ] implement minimax in the GUI

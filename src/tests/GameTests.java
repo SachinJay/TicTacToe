@@ -170,5 +170,12 @@ class GameTests
 		//Thus: 
 		int expected = Constants.ONE_IN_LINE_SCORE * 3;
 		assertEquals(expected, game.getBoard().evaluate(Square.X));
+		
+		game.getBoard().place(Square.BLANK, 0, 1);
+		game.getBoard().place(Square.BLANK, 2, 1);
+		game.getBoard().place(Square.X, 0, 0);
+		game.getBoard().place(Square.X, 0, 2);
+		game.getBoard().print();
+		System.out.println(game.getBoard().evaluate(Square.X));
 	}
 }

@@ -6,3 +6,4 @@ Goals
 - [x] implement GUI
 - [x] implement minimax
   - [ ] implement minimax in the GUI
+- [ ] implement client/server

@@ -80,9 +80,7 @@ public class Board
 		
 		for(int[] line : Constants.LINES)
 		{
-			System.out.println("Line: "+line[0]+line[1]+line[2]+line[3]+line[4]+line[5]);
 			score+= evalLine(line[0],line[1],line[2],line[3],line[4],line[5],maximizer);
-			System.out.println();
 		}
 		
 		return score;
@@ -109,57 +107,47 @@ public class Board
 		// First square
 		if (board[r1][c1] == maximizer)
 		{
-			System.out.println("max in first");
 			score = Constants.ONE_IN_LINE_SCORE;
 		} 
 		else if (board[r1][c1] == minimizer)
 		{
-			System.out.println("min in first");
 			score = -1*Constants.ONE_IN_LINE_SCORE;
 		}
 
 		// Second square
 		if (board[r2][c2] == maximizer)
 		{
-			System.out.println("max in second");
 			//Previous square was maximizer
 			if (score == Constants.ONE_IN_LINE_SCORE)
 			{ 
-				System.out.println("Max in first");
 				score = Constants.TWO_IN_LINE_SCORE;
 			} 
 			//Previous square was minimizer
 			else if (score == -1*Constants.ONE_IN_LINE_SCORE)
 			{ 
-				System.out.println("Min in first");
 				return 0;
 			} 
 			//No one had the first square
 			else
 			{ 
-				System.out.println("no one had first");
 				score = Constants.ONE_IN_LINE_SCORE;
 			}
 		} 
 		else if (board[r2][c2] == minimizer)
 		{
-			System.out.println("min in second");
 			// square 1 is minimizer
 			if (score == -1*Constants.ONE_IN_LINE_SCORE)
 			{ 
-				System.out.println("min in first");
 				score = -1*Constants.TWO_IN_LINE_SCORE;
 			} 
 			// square 1 is maximizer
 			else if (score == Constants.ONE_IN_LINE_SCORE)
 			{ 
-				System.out.println("max in second");
 				return 0;
 			} 
 			// square 1 is empty
 			else
 			{ 
-				System.out.println("first empty");
 				score = -1*Constants.ONE_IN_LINE_SCORE;
 			}
 		}
@@ -167,47 +155,36 @@ public class Board
 		// Third Square
 		if (board[r3][c3] == maximizer)
 		{
-			System.out.println("max in third");
 			// square 1 and/or square 2 is maximizer
 			if (score > 0)
 			{ 
-				System.out.println("max was in first or second or both");
-				System.out.println(score);
 				score *= 10;
-				System.out.println(score);
 			} 
 			else if (score < 0)
 			{ // cell1 and/or cell2 is oppSeed
-				System.out.println("min was in first or second or both");
 				return 0;
 			} 
 			else
 			{ // cell1 and cell2 are empty
-				System.out.println("no one in first or second");
 				score = Constants.ONE_IN_LINE_SCORE;
 			}
 		} 
 		else if (board[r3][c3] == minimizer)
 		{
-			System.out.println("min in third");
 			if (score < 0)
 			{ // cell1 and/or cell2 is oppSeed
-				System.out.println("min in second or first or both");
 				score *= 10;
 			} 
 			else if (score > 1)
 			{ // cell1 and/or cell2 is mySeed
-				System.out.println("max in second or first or both");
 				return 0;
 			} 
 			else
 			{ // cell1 and cell2 are empty
-				System.out.println("first and second empty");
 				score = -1*Constants.ONE_IN_LINE_SCORE;
 			}
 		}
 		
-		System.out.println(score);
 		return score;
 
 	}

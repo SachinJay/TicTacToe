@@ -21,6 +21,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
@@ -37,6 +38,7 @@ public class Grid
 	private Game game;
 	private BoardPanel boardPanel;
 	private StatusPanel statusPanel;
+	private Player p1;
 	private AIPlayer aiPlayer;
 	
 	
@@ -52,7 +54,7 @@ public class Grid
 		gameFrame.setJMenuBar(menuBar);
 		
 		//Game between person and AI
-		Player p1 = new Player("Sachin", false, Square.X);
+		p1 = new Player("Sachin", false, Square.X);
 		aiPlayer = new AIPlayer("HAL",Square.O);
 		game = new Game(p1, aiPlayer);
 		
@@ -124,8 +126,7 @@ public class Grid
 		}
 		
 		public void drawBoard(Board board)
-		{
-			
+		{			
 			removeAll();
 			
 			for(SquarePanel sp: boardSquares)
@@ -133,8 +134,18 @@ public class Grid
 				sp.drawSquare(board);
 				add(sp);
 			}
+			
 			validate();
 			repaint();
+			
+			if(game.isWon(Square.X) || game.isWon(Square.O))
+			{
+				int response = JOptionPane.showConfirmDialog(this, "Wanna restart the game?");
+				if(response == 0)
+				{
+					Grid newGame = new Grid();
+				}
+			}
 		}
 		
 	}
@@ -202,8 +213,7 @@ public class Grid
 							bp.drawBoard(game.getBoard());
 							statusPanel.setText(game);
 						}
-					});
-					
+					});					
 				}
 			});
 		}
